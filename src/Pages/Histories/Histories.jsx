@@ -1,8 +1,11 @@
 import React from 'react'
+import Navbar from '../../Components/Navbar/Navbar'
 
 const Histories = () => {
   return (
-    <div>Histories</div>
+    <div>
+      <Navbar />
+      Histories</div>
   )
 }
 

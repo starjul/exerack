@@ -5,11 +5,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
-  background-color: #f3f1ef;
+  background-color: #E4E4E4;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+a {
+  text-decoration: none;
 }
 
 
@@ -17,46 +21,6 @@ code {
   display: flex;
 }
 
-.f-col {
-  flex-direction: column;
-}
-
-.space-bw {
-  justify-content: space-between;
-}
-
-.alitems-center {
-  align-items: center;
-}
-
-.w60 {
-  width: 60%;
-}
-
-.container {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  font-size: 1rem;
-  padding: 0px 40px;
-}
-
-tbody,
-td,
-tfoot,
-th,
-thead,
-tr {
-  border-color: inherit;
-  border-style: solid;
-  border-width: 0;
-}
-
-table {
-  caption-side: bottom;
-  border-collapse: collapse;
-}
-
-tr {
-  border-radius: 10%;
+.flex1 {
+  flex: 1;
 }
