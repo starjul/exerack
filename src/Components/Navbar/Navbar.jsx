@@ -138,7 +138,7 @@ const DropDownItem = styled.li`
 `;
 
 // Navbar function
-const Navbar = () => {
+const Navbar = ({path}) => {
   const [imgProfile, setImgProfile] = useState("");
   const [isToggle, setIsToggle] = useState(false);
 
@@ -153,60 +153,62 @@ const Navbar = () => {
   return (
     <NavBar>
       <Container margin="0 48px">
-        <Link to="/">
+        <Link to="/home">
           <h1>Exerack</h1>
         </Link>
-        <Menu>
-          <MenuList>
-            <Link to="/home">
-              {/* <Tooltip title="Home">
+        {path !== "login" && (
+          <Menu>
+            <MenuList>
+              <Link to="/home">
+                {/* <Tooltip title="Home">
                 <HomeIcon />
               </Tooltip> */}
-              <p>Home</p>
-            </Link>
-            <Link to="/activities">
-              <p>Activities</p>
-            </Link>
-            <Link to="/history">
-              <p>History</p>
-            </Link>
-          </MenuList>
-          <ProfileButton onClick={handleOpenDropDown}>
-            <div>
-              {imgProfile ? (
-                <Avatar alt="" src="" />
-              ) : (
-                <Avatar
-                  sx={{ bgcolor: deepOrange[500], width: 34, height: 34 }}
-                >
-                  J
-                </Avatar>
-              )}
-            </div>
-            <p>Julaluk</p>
-            <ArrowDropDownIcon fontSize="small" id="arrowIcon" />
-          </ProfileButton>
-          <DropDownMenu open={isToggle} onClose={handleCloseDropDown}>
-            <Link to="/profile">
-              <DropDownItem>
-                <PersonIcon />
-                <span>Profile</span>
-              </DropDownItem>
-            </Link>
-            <Link to="/setting">
-              <DropDownItem>
-                <SettingsIcon />
-                <span>Setting</span>
-              </DropDownItem>
-            </Link>
-            <Link to="/">
-              <DropDownItem>
-                <LogoutIcon />
-                <span>Logout</span>
-              </DropDownItem>
-            </Link>
-          </DropDownMenu>
-        </Menu>
+                <p>Home</p>
+              </Link>
+              <Link to="/activities">
+                <p>Activities</p>
+              </Link>
+              <Link to="/history">
+                <p>History</p>
+              </Link>
+            </MenuList>
+            <ProfileButton onClick={handleOpenDropDown}>
+              <div>
+                {imgProfile ? (
+                  <Avatar alt="" src="" />
+                ) : (
+                  <Avatar
+                    sx={{ bgcolor: deepOrange[500], width: 34, height: 34 }}
+                  >
+                    J
+                  </Avatar>
+                )}
+              </div>
+              <p>Julaluk</p>
+              <ArrowDropDownIcon fontSize="small" id="arrowIcon" />
+            </ProfileButton>
+            <DropDownMenu open={isToggle} onClose={handleCloseDropDown}>
+              <Link to="/profile">
+                <DropDownItem>
+                  <PersonIcon />
+                  <span>Profile</span>
+                </DropDownItem>
+              </Link>
+              <Link to="/setting">
+                <DropDownItem>
+                  <SettingsIcon />
+                  <span>Setting</span>
+                </DropDownItem>
+              </Link>
+              <Link to="/">
+                <DropDownItem>
+                  <LogoutIcon />
+                  <span>Logout</span>
+                </DropDownItem>
+              </Link>
+            </DropDownMenu>
+          </Menu>
+        )}
       </Container>
     </NavBar>
   );

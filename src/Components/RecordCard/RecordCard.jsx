@@ -7,9 +7,9 @@ import { iconSwitch } from "./CheckIcon";
 
 const activityType = "treadmill";
 
-const RecordCard = () => {
+const RecordCard = ({onClick}) => {
   return (
-    <Card className="historyCard" flexDirection="column">
+    <Card className="historyCard" flexDirection="column" onClick={onClick}>
       <div className="flex">
         <div className="activity-type">
           <div className="activityLogo">{iconSwitch({activityType})}</div>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Container, Button } from "../GlobalComponent";
 import { Link } from "react-router-dom";
@@ -14,6 +14,7 @@ const RecordContainer = styled(Container)`
   border-radius: 10px;
   justify-content: space-between;
   height: min-content;
+  padding: 0 0 18px 0;
 
   & .marginRecord {
     margin: 30px 30px 10px 30px;
@@ -21,7 +22,7 @@ const RecordContainer = styled(Container)`
 
     & .view-more p {
       color: #888888;
-      margin: 1rem 0;
+      margin: 1rem 0 0 0;
       border-bottom: 1px solid #888888;
       width: fit-content;
       font-size: 14px;
@@ -54,7 +55,7 @@ const RecordContainer = styled(Container)`
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 50vh;
+    height: 56vh;
     width: 100%;
     max-width: 600px;
     overflow-y: scroll;
@@ -67,6 +68,10 @@ const RecordContainer = styled(Container)`
   /* Hide scrollbar for chrome */
   & .record-card-container::-webkit-scrollbar {
     display: none;
+  }
+
+  & .record-form {
+    display: ${(props) => (props.open ? "flex" : "none")};
   }
 `;
 
@@ -106,7 +111,16 @@ const TitleRecord = styled.div`
   }
 `;
 
-const Record = () => {
+const Record = ({ onClick, path }) => {
+  const [recordData, setRecordData] = useState([]);
+  const [editData, setEditData] = useState({});
+  const [showEditData, setShowEditData] = useState(false);
+
+  // const onClickRecord = (record) => {
+  //   setEditData(record);
+  //   setShowEditData(!showEditData);
+  //   console.log(showEditData);
+  // };
   return (
     <RecordContainer>
       <div className="marginRecord">
@@ -128,28 +142,16 @@ const Record = () => {
           <p>Calories</p>
         </TitleRecord>
         <div className="record-card-container">
-          <RecordCard />
-          <RecordCard />
-          <RecordCard />
-          <RecordCard />
-
-          <RecordCard />
-          <RecordCard />
-          <RecordCard />
-          <RecordCard />
-          <RecordCard />
-
-          <RecordCard />
-          <RecordCard />
-          <RecordCard />
-          <RecordCard />
-          <RecordCard />
+          <RecordCard onClick={onClick} data={recordData} />
         </div>
-        <Link to="/history" className="view-more">
-          <center>
-            <p>View more</p>
-          </center>
-        </Link>
+        <div className="record-form"></div>
+        {path !== "history" && (
+          <Link to="/history" className="view-more" >
+            <center>
+              <p>View more</p>
+            </center>
+          </Link>
+        )}
       </div>
     </RecordContainer>
   );

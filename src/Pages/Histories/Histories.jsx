@@ -1,12 +1,17 @@
-import React from 'react'
-import Navbar from '../../Components/Navbar/Navbar'
+import React from "react";
+import { Container } from "../../Components/GlobalComponent";
+import Navbar from "../../Components/Navbar/Navbar";
+import Record from "../../Components/Reacord/Record";
 
 const Histories = () => {
   return (
     <div>
       <Navbar />
-      Histories</div>
-  )
-}
+      <Container justifyContent="space around" margin="3rem 24px">
+        <Record path="history"/>
+      </Container>
+    </div>
+  );
+};
 
-export default Histories
+export default Histories;

@@ -3,13 +3,13 @@ import "./RecordCard.css";
 
 export const iconSwitch = ({activityType}) => {
   switch (activityType) {
-    case "outdoor running":
+    case "running":
       return (
         <img src="/Assets/Logo/running.png" alt="running" className="logo" />
       );
     case "walking":
       return (
-        <img src="/Assets/Logo/walking.png" alt="walkink" className="logo" />
+        <img src="/Assets/Logo/walking.png" alt="walking" className="logo" />
       );
     case "bicycle riding":
       return (

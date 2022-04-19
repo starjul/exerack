@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import Navbar from "../../Components/Navbar/Navbar";
 
 const Register = () => {
   return (
-    <div>Register</div>
-  )
-}
+    <>
+      <Navbar path="login" />
+      <p>Register</p>
+    </>
+  );
+};
 
-export default Register
+export default Register;
