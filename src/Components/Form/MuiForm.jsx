@@ -11,18 +11,25 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Button, Container } from "../GlobalComponent";
 import EditIcon from "@mui/icons-material/Edit";
+import {
+  postActivity,
+  putActivityById,
+  deleteActivityById,
+} from "../../Services/Activity";
 
 // Styled Component
 const FormContainer = styled(Container)`
   display: flex;
-  flex-direction: column;
+  flex-direction: column !important;
   width: 94%;
-  max-width: 560px;
+  max-width: 660px;
+  min-width: 500px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.1);
   transition: 0.3s;
   padding-bottom: 2rem;
+  z-index: 1000;
 
   &:hover {
     box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2);
@@ -77,25 +84,6 @@ const EditButton = styled(Button)`
   }
 `;
 
-const DurationContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 84%;
-  margin: 0;
-  align-self: center;
-
-  & p {
-    font-size: 14px;
-    color: #7a7a7a;
-    text-align: start;
-    margin: 0.1rem 0.5rem 0.2rem 0.5rem;
-  }
-
-  & .flex {
-    justify-content: space-between;
-  }
-`;
-
 const activities = [
   { value: "running", label: "running" },
   { value: "walking", label: "walking" },
@@ -106,15 +94,33 @@ const activities = [
   { value: "treadmill", label: "treadmill" },
   { value: "yoga", label: "yoga" },
   { value: "rope skipping", label: "rope skipping" },
+  { value: "sleep", label: "sleep" },
 ];
 
-export default function Muiform({ title, path}) {
+export default function Muiform({ title, path, type, onClose, data, id }) {
   const [activityType, setActivityType] = useState("");
   const [value, setValue] = React.useState(new Date());
-  const [Hourduration, setHourDuration] = useState(0);
   const [minutesDuration, setMintuesDuration] = useState(0);
   const [caloriesData, setCaloriesData] = useState(0);
   const [activityDescription, setActivityDescription] = useState("");
+
+  useEffect(() => {
+    setValue(new Date())
+    if (type === "edit") {
+      setActivityType(data.activity_type);
+      setValue(data.date);
+      setMintuesDuration(data.duration);
+      setCaloriesData(data.calories);
+      setActivityDescription(data.description);
+    }
+    return () => {
+      setActivityType("");
+      setValue(new Date());
+      setMintuesDuration(0);
+      setCaloriesData(0);
+      setActivityDescription("");
+    };
+  }, [type, data]);
 
   const handleActivityType = (event) => {
     setActivityType(event.target.value);
@@ -123,6 +129,44 @@ export default function Muiform({ title, path}) {
 
   const handleTimeChange = (newValue) => {
     setValue(newValue);
+  };
+
+  const handleCalChange = (e) => {
+    setCaloriesData(e.target.value);
+  };
+
+  const handleDuration = (e) => {
+    setMintuesDuration(e.target.value);
+  };
+
+  const handleDescription = (e) => {
+    setActivityDescription(e.target.value);
+  };
+
+  const handleSave = async (e) => {
+    if (type === "add") {
+      await postActivity({
+        activity_type: activityType,
+        date: value,
+        duration: minutesDuration,
+        calories: caloriesData,
+        description: activityDescription,
+      });
+    } else if (type === "edit") {
+      await putActivityById(id, {
+        activity_type: activityType,
+        date: value,
+        duration: minutesDuration,
+        calories: caloriesData,
+        description: activityDescription,
+      });
+    }
+    onClose(true);
+  };
+
+  const handleDelete = async (e) => {
+    await deleteActivityById(id);
+    onClose(true);
   };
 
   return (
@@ -136,11 +180,11 @@ export default function Muiform({ title, path}) {
         autoComplete="off"
       >
         <div className="form-header">
-        {path !== "activities" && ( 
-          <button className="closeIcon"  >
-            <CloseIcon fontSize="medium" />
-          </button>
-        )}
+          {path !== "activities" && (
+            <button className="closeIcon">
+              <CloseIcon fontSize="medium" />
+            </button>
+          )}
           <div className="header">
             <h2>{title}</h2>
             {title === "Record" && (
@@ -151,7 +195,7 @@ export default function Muiform({ title, path}) {
             )}
           </div>
         </div>
-        <Container flexDirextion="column" margin="1rem 2rem 1rem 2rem">
+        <Container flexDirection="column" margin="1rem 2rem 1rem 2rem">
           <div>
             <TextField
               id="activity-type"
@@ -179,48 +223,59 @@ export default function Muiform({ title, path}) {
               />
             </LocalizationProvider>
           </div>
-          <DurationContainer>
-            <p>Duration</p>
-            <div className="flex">
-              <TextField
-                label="Hour"
-                id="duration-hour"
-                required
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">hr</InputAdornment>
-                  ),
-                }}
-              />
-              <TextField
-                label="Minutes"
-                id="duration-minutes"
-                required
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">m</InputAdornment>
-                  ),
-                }}
-              />
-            </div>
-          </DurationContainer>
           <div>
             <TextField
-              label="Calories"
-              id="calories"
+              label="Duration"
+              id="duration-minutes"
+              onChange={handleDuration}
+              required
+              value={minutesDuration}
               InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">cal</InputAdornment>
+                endAdornment: (
+                  <InputAdornment position="end">min</InputAdornment>
                 ),
               }}
             />
           </div>
           <div>
-            <TextField id="decription" label="Description" multiline rows={2} />
+            <TextField
+              label="Calories"
+              id="calories"
+              onChange={handleCalChange}
+              value={caloriesData}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">cal</InputAdornment>
+                ),
+              }}
+            />
+          </div>
+          <div>
+            <TextField
+              id="decription"
+              label="Description"
+              multiline
+              rows={2}
+              onChange={handleDescription}
+              value={activityDescription}
+            />
           </div>
         </Container>
       </Box>
-      {title !== "Record" && <Button className="save">Save</Button>}
+      <Container>
+        <Button className="save" onClick={handleSave}>
+          Save
+        </Button>
+        {type !== "add" && (
+          <Button
+            className="save"
+            backgroundColor="lightgray"
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
+        )}
+      </Container>
     </FormContainer>
   );
 }

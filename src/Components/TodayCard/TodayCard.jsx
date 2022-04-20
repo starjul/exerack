@@ -8,13 +8,14 @@ const CardContain = styled(Card)`
   max-width: 600px;
   flex-direction: column;
   border-radius: 10px;
+  height: 284px;
 
   & h2 {
       text-align: left;
       margin: 0.75rem 1rem;
   }
 
-  & h2:first-child{
+  & .td{
       margin-top: 1.5rem;
   }
 
@@ -35,18 +36,18 @@ const CardContain = styled(Card)`
 const TodayCard = () => {
   return (
     <CardContain>
-      <h2>Today</h2>
+      <h2 className="td">Today</h2>
       <div className="smallCard-container">
         <SmallCard goalType={"Steps"} />
         <SmallCard goalType={"Calories"} />
         <SmallCard goalType={"Sleep"} />
       </div>
-      <h2 className="tw">This week</h2>
+      {/* <h2 className="tw">This week</h2>
       <div className="smallCard-container">
         <SmallCard goalType={"Steps"} />
         <SmallCard goalType={"Calories"} />
         <SmallCard goalType={"Sleep"} />
-      </div>
+      </div> */}
     </CardContain>
   );
 };

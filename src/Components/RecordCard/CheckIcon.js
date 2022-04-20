@@ -1,8 +1,8 @@
 import "./RecordCard.css";
 //// Function for checking activity icons
 
-export const iconSwitch = ({activityType}) => {
-  switch (activityType) {
+export const iconSwitch = ({activity_type}) => {
+  switch (activity_type) {
     case "running":
       return (
         <img src="/Assets/Logo/running.png" alt="running" className="logo" />
@@ -49,6 +49,14 @@ export const iconSwitch = ({activityType}) => {
           className="logo"
         />
       );
+      case "sleep":
+        return (
+          <img
+          src="/Assets/Logo/sleep.png"
+          alt="sleep"
+          className="logo"
+        />
+        )
     default:
       return (
         <img src="/Assets/Logo/fitness.png" alt="exercise" className="logo" />

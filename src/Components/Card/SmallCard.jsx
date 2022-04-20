@@ -47,12 +47,12 @@ const CardContainer = styled(Card)`
   }
 `;
 
-const SmallCard = ({ goalType }) => {
+const SmallCard = ({ goalType, goalSetting }) => {
   return (
     <CardContainer>
       <div className="gt-container">{goalIcon({ goalType })}</div>
       <div className="gt-content">
-        <h2>3000</h2>
+        <h2>{goalSetting}</h2>
         <div>{goalUnit({ goalType })}</div>
       </div>
     </CardContainer>

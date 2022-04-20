@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Muiform from "../../Components/Form/MuiForm";
 import { Container, Popup } from "../../Components/GlobalComponent";
@@ -6,6 +6,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import ProfileCard from "../../Components/ProfileCard/ProfileCard";
 import Record from "../../Components/Reacord/Record";
 import TodayCard from "../../Components/TodayCard/TodayCard";
+import { getActivity } from "../../Services/Activity";
 
 const HomeContain = styled(Container)`
   & .profile-shortcut {
@@ -39,17 +40,14 @@ const HomeContain = styled(Container)`
 `;
 
 const Home = () => {
-  const [showForm, setShowForm] = useState(false);
+  const [activity, setActivity] = useState([]);
+  const [reloadRecord, setReloadRecord] = useState(false);
 
-  console.log(showForm);
-
-  const handleShow = (event) => {
-    setShowForm(!showForm);
-  };
-
-  const closeForm = () => {
-    setShowForm(false);
-  };
+  useEffect(async () => {
+    const activityData = await getActivity(14);
+    setActivity(activityData.data);
+    console.log("act", activityData);
+  }, [reloadRecord]);
 
   return (
     <>
@@ -60,12 +58,14 @@ const Home = () => {
           <TodayCard />
         </div>
         <div className="record-content">
-          <Record onClick={handleShow} />
+          <Record
+            reloadRecord={() => setReloadRecord(!reloadRecord)}
+            data={activity}
+            
+          />
         </div>
       </HomeContain>
-      <Popup open={showForm}>
-        <Muiform />
-      </Popup>
+      
     </>
   );
 };

@@ -20,7 +20,7 @@ const NavBar = styled.header`
   box-sizing: border-box;
   flex-shrink: 0;
   position: sticky;
-  z-index: 1100;
+  z-index: 1;
   top: 0;
   left: auto;
   right: 0;
@@ -159,13 +159,13 @@ const Navbar = ({path}) => {
   return (
     <NavBar>
       <Container margin="0 48px">
-        <Link to="/home">
+        <Link to="/">
           <h1>Exerack</h1>
         </Link>
         {path !== "login" && (
           <Menu>
             <MenuList>
-              <Link to="/home">
+              <Link to="/">
                 {/* <Tooltip title="Home">
                 <HomeIcon />
               </Tooltip> */}
@@ -194,13 +194,13 @@ const Navbar = ({path}) => {
               <ArrowDropDownIcon fontSize="small" id="arrowIcon" />
             </ProfileButton>
             <DropDownMenu open={isToggle} onClose={handleCloseDropDown}>
-              <Link to="/profile">
+              <Link to="">
                 <DropDownItem>
                   <PersonIcon />
                   <span>Profile</span>
                 </DropDownItem>
               </Link>
-              <Link to="/setting">
+              <Link to="">
                 <DropDownItem>
                   <SettingsIcon />
                   <span>Setting</span>

@@ -12,13 +12,13 @@ const Router = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="home" element={<Home />} />
+        {/* <Route path="/" element={<Login />} /> */}
+        <Route path="/" element={<Home />} />
         <Route path="activities" element={<Activities />} />
         <Route path="history" element={<Histories />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="setting" element={<Setting />} />
-        <Route path="register" element={<Register />} />
+        {/* <Route path="profile" element={<Profile />} /> */}
+        {/* <Route path="setting" element={<Setting />} /> */}
+        {/* <Route path="register" element={<Register />} /> */}
       </Routes>
     </>
   );

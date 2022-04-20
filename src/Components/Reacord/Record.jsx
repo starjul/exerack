@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Container, Button } from "../GlobalComponent";
+import { Container, Button, Popup } from "../GlobalComponent";
 import { Link } from "react-router-dom";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RecordCard from "../RecordCard/RecordCard";
+import { getActivity } from "../../Services/Activity";
+import Muiform from "../Form/MuiForm";
 
 const RecordContainer = styled(Container)`
   width: 100%;
@@ -111,16 +113,12 @@ const TitleRecord = styled.div`
   }
 `;
 
-const Record = ({ onClick, path }) => {
+const Record = ({ onClick, path, data, reloadRecord }) => {
   const [recordData, setRecordData] = useState([]);
   const [editData, setEditData] = useState({});
   const [showEditData, setShowEditData] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
-  // const onClickRecord = (record) => {
-  //   setEditData(record);
-  //   setShowEditData(!showEditData);
-  //   console.log(showEditData);
-  // };
   return (
     <RecordContainer>
       <div className="marginRecord">
@@ -129,12 +127,16 @@ const Record = ({ onClick, path }) => {
             <h2>History</h2>
             {/* <p>(1W)</p> */}
           </div>
-          <Link to="/history">
-            <RecordButton height="40px" width="120px">
-              <AddCircleIcon fontSize="small" />
-              <span>Add</span>
-            </RecordButton>
-          </Link>
+          <RecordButton height="40px" width="120px">
+            <AddCircleIcon fontSize="small" />
+            <span
+              onClick={() => {
+                setShowForm(!showForm);
+              }}
+            >
+              Add
+            </span>
+          </RecordButton>
         </header>
         <TitleRecord>
           <p>Activity</p>
@@ -142,31 +144,37 @@ const Record = ({ onClick, path }) => {
           <p>Calories</p>
         </TitleRecord>
         <div className="record-card-container">
-          <RecordCard onClick={onClick} data={recordData} />
-          <RecordCard onClick={onClick} data={recordData} />
-          <RecordCard onClick={onClick} data={recordData} />
-          <RecordCard onClick={onClick} data={recordData} />
-          <RecordCard onClick={onClick} data={recordData} />
-          <RecordCard onClick={onClick} data={recordData} />
-          <RecordCard onClick={onClick} data={recordData} />
-          <RecordCard onClick={onClick} data={recordData} />
-          <RecordCard onClick={onClick} data={recordData} />
-          <RecordCard onClick={onClick} data={recordData} />
-          <RecordCard onClick={onClick} data={recordData} />
-          <RecordCard onClick={onClick} data={recordData} />
-          <RecordCard onClick={onClick} data={recordData} />
-          <RecordCard onClick={onClick} data={recordData} />
-
+          {data.map((res, index) => (
+            <RecordCard
+              activity_type={res.activity_type}
+              calories={res.calories}
+              date={res.date}
+              duration={res.duration}
+              id={res._id}
+              description={res.description}
+              reloadRecord={reloadRecord}
+            />
+          ))}
         </div>
         <div className="record-form"></div>
         {path !== "history" && (
-          <Link to="/history" className="view-more" >
+          <Link to="/history" className="view-more">
             <center>
               <p>View more</p>
             </center>
           </Link>
         )}
       </div>
+      <Popup open={showForm}>
+        <Muiform
+          title={"Create Activity"}
+          type="add"
+          onClose={(e) => {
+            setShowForm(false);
+            reloadRecord();
+          }}
+        />
+      </Popup>
     </RecordContainer>
   );
 };

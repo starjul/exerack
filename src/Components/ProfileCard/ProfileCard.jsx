@@ -92,9 +92,9 @@ const ProfileCard = () => {
           <p>My Goals</p>
         </div>
         <div className="smallCard-container">
-          <SmallCard goalType={"Steps"} />
-          <SmallCard goalType={"Calories"} />
-          <SmallCard goalType={"Sleep"} />
+          <SmallCard goalType={"Steps"}  goalSetting="2000"/>
+          <SmallCard goalType={"Calories"}  goalSetting="1000"/>
+          <SmallCard goalType={"Sleep"} goalSetting="8" />
         </div>
       </div>
     </CardContain>

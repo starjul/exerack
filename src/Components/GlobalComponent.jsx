@@ -3,10 +3,10 @@ import styled from "styled-components";
 // Container
 export const Container = styled.div`
   display: flex;
-  flex-direction: ${(props) => props.flexDirextion || "row"};
-  /* width: 100%; */
+  flex-direction: ${(props) => props.flexDirection || "row"};
+  width: ${(props) => props.width};
   margin: ${(props) => props.margin || "24px"};
-  justify-content: ${props => props.justifyContent || "center"};
+  justify-content: ${(props) => props.justifyContent || "center"};
   @media only screen and (max-width: 820px) {
     margin: 0 20px;
   }
@@ -55,7 +55,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  width: 94%;
+  width: ${(props) => props.width || "94%"};
   max-width: 560px;
   border-radius: 5px;
   box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.1);
@@ -69,7 +69,7 @@ export const Form = styled.form`
 // Pop ups
 export const Popup = styled.div`
   z-index: 1;
-  display: ${props => props.open ? "flex" : "none"} ;
+  display: ${(props) => (props.open ? "flex" : "none")};
   position: absolute;
   top: 54%;
   left: 50%;

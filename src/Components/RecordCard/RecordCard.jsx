@@ -1,30 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 // import styled from "styled-components";
-import { Card } from "../GlobalComponent";
+import { Card, Popup } from "../GlobalComponent";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import "./RecordCard.css";
 import { iconSwitch } from "./CheckIcon";
+import moment from "moment";
+import Muiform from "../Form/MuiForm";
 
-const activityType = "treadmill";
-
-const RecordCard = ({onClick}) => {
+const RecordCard = ({
+  activity_type,
+  calories,
+  date,
+  duration,
+  description,
+  id,
+  reloadRecord,
+}) => {
+  console.log("id",id)
+  const [showForm, setShowForm] = useState(false);
   return (
-    <Card className="historyCard" flexDirection="column" onClick={onClick}>
-      <div className="flex">
-        <div className="activity-type">
-          <div className="activityLogo">{iconSwitch({activityType})}</div>
-          <p>Run</p>
+    <>
+      <Card
+        className="historyCard"
+        flexDirection="column"
+        onClick={() => {
+          setShowForm(!showForm);
+        }}
+      >
+        <div className="flex">
+          <div className="activity-type">
+            <div className="activityLogo">{iconSwitch({ activity_type })}</div>
+            <p>{activity_type}</p>
+          </div>
+          <div className="duration">
+            <p>{duration} min</p>
+          </div>
+          <div className="calories">
+            <LocalFireDepartmentIcon fontSize="small" />
+            <p>{calories} cal</p>
+          </div>
         </div>
-        <div className="duration">
-          <p>50 min</p>
-        </div>
-        <div className="calories">
-          <LocalFireDepartmentIcon fontSize="small" />
-          <p>300 cal</p>
-        </div>
-      </div>
-      <p className="dateRecord">17-04-22 17:00-17:50</p>
-    </Card>
+        <p className="dateRecord">
+          {moment(date).format("DD-MM-YYYY HH:mm:ss")}
+        </p>
+      </Card>
+      <Popup open={showForm}>
+        <Muiform
+          title={"Create Activity"}
+          type="edit"
+          id={id}
+          data={{ activity_type, calories, date, duration, description }}
+          onClose={(e) => {
+            setShowForm(false);
+            reloadRecord();
+          }}
+        />
+      </Popup>
+    </>
   );
 };
 
