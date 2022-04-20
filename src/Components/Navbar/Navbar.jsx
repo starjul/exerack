@@ -32,7 +32,7 @@ const NavBar = styled.header`
     margin: 0.4em 0;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
   }
 `;
 
@@ -59,7 +59,7 @@ const MenuList = styled.div`
     font-weight: 600;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
     display: none;
   }
 `;
@@ -86,9 +86,15 @@ const ProfileButton = styled(Button)`
     padding: 0.2em 0.15em;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
     width: 118px;
     height: 42px;
+
+    & p {
+      font-size: 15px;
+      font-weight:500 ;
+    }
+
     & div {
       margin-left: 0;
     }
@@ -114,7 +120,7 @@ const DropDownMenu = styled.ul`
   flex-direction: column;
   display: ${(props) => (props.open ? "flex" : "none")};
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
     right: 20px;
   }
 `;
@@ -132,7 +138,7 @@ const DropDownItem = styled.li`
     margin-left: 10px;
   }
 
-  /* @media only screen and (max-width: 768px) {
+  /* @media only screen and (max-width: 820px) {
     font-size: 14px;
   } */
 `;

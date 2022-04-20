@@ -143,6 +143,20 @@ const Record = ({ onClick, path }) => {
         </TitleRecord>
         <div className="record-card-container">
           <RecordCard onClick={onClick} data={recordData} />
+          <RecordCard onClick={onClick} data={recordData} />
+          <RecordCard onClick={onClick} data={recordData} />
+          <RecordCard onClick={onClick} data={recordData} />
+          <RecordCard onClick={onClick} data={recordData} />
+          <RecordCard onClick={onClick} data={recordData} />
+          <RecordCard onClick={onClick} data={recordData} />
+          <RecordCard onClick={onClick} data={recordData} />
+          <RecordCard onClick={onClick} data={recordData} />
+          <RecordCard onClick={onClick} data={recordData} />
+          <RecordCard onClick={onClick} data={recordData} />
+          <RecordCard onClick={onClick} data={recordData} />
+          <RecordCard onClick={onClick} data={recordData} />
+          <RecordCard onClick={onClick} data={recordData} />
+
         </div>
         <div className="record-form"></div>
         {path !== "history" && (

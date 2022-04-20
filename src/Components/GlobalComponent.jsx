@@ -7,7 +7,7 @@ export const Container = styled.div`
   /* width: 100%; */
   margin: ${(props) => props.margin || "24px"};
   justify-content: ${props => props.justifyContent || "center"};
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
     margin: 0 20px;
   }
 `;
