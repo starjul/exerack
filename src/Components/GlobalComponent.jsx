@@ -5,10 +5,11 @@ export const Container = styled.div`
   display: flex;
   flex-direction: ${(props) => props.flexDirection || "row"};
   width: ${(props) => props.width};
+  height: ${(props) => props.height};
   margin: ${(props) => props.margin || "24px"};
   justify-content: ${(props) => props.justifyContent || "center"};
   @media only screen and (max-width: 820px) {
-    margin: 0 20px;
+    margin: 5% 20px;
   }
 `;
 
@@ -56,10 +57,11 @@ export const Form = styled.form`
   flex-direction: column;
   background-color: #fff;
   width: ${(props) => props.width || "94%"};
-  max-width: 560px;
-  border-radius: 5px;
+  max-width: ${(props)=>props.maxWidth || "560px"};
+  border-radius: 10px;
   box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.1);
   transition: 0.3s;
+  padding: ${props=>props.padding};
 
   &:hover {
     box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2);

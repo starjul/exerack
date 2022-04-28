@@ -22,7 +22,7 @@ const FormContainer = styled(Container)`
   display: flex;
   flex-direction: column !important;
   width: 94%;
-  max-width: 660px;
+  max-width: 540px;
   min-width: 500px;
   background-color: #fff;
   border-radius: 10px;
@@ -262,7 +262,7 @@ export default function Muiform({ title, path, type, onClose, data, id }) {
           </div>
         </Container>
       </Box>
-      <Container>
+      <Container margin="0">
         <Button className="save" onClick={handleSave}>
           Save
         </Button>

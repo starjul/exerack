@@ -1,17 +1,17 @@
 import React from "react";
-import AuthForm from "../../Components/Form/AuthForm";
 import { Container } from "../../Components/GlobalComponent";
 import Navbar from "../../Components/Navbar/Navbar";
+import AuthForm from "../../Components/Form/AuthForm";
 
-const Login = () => {
+const SignUp = () => {
   return (
     <>
       <Navbar path="login" />
-      <Container margin="4.6%">
-        <AuthForm path="Login"/>
+      <Container margin="2rem">
+        <AuthForm path="Sign up"/>
       </Container>
     </>
   );
 };
 
-export default Login;
+export default SignUp;

@@ -3,6 +3,7 @@ import { Card } from "../GlobalComponent";
 import styled from "styled-components";
 import SmallCard from "../Card/SmallCard";
 
+
 const CardContain = styled(Card)`
   width: 100%;
   max-width: 600px;

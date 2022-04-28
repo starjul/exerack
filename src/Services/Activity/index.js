@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://localhost:4000/activity";
+const URL = "https://exerack-backend.herokuapp.com/activity";
 
 export const getActivity = async (limit) => {
   try {
