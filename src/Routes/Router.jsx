@@ -11,28 +11,25 @@ import SignUp from "../Pages/SignUp/SignUp";
 import GuardRoute from "./GuardRoute";
 
 const Router = () => {
-  const [user, setUser] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
-  // useEffect(() => {
-  //   const u = localStorage.getItem("user");
-  //   u && JSON.parse(u) ? setUser(true) : setUser(false)
-  // }, [])
+  useEffect(() => {
+    const login = localStorage.getItem("isLogin");
+    setIsLogin(login === "true" ? true : false)
+  }, [])
   
 
-  // useEffect(() => {
-  //   localStorage.setItem("user",user)
-  // }, [user])
-  
   return (
     <Routes>
-      {!user && (
+      {!isLogin && (
         <>
           <Route path="/login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
         </>
       )}
-      {user && (
+      {isLogin && (
         <>
+          <Route exact path="/home" element={<Navigate to="/" replace={true} />} />
           <Route exact path="/" element={<Home />} />
           <Route path="activities" element={<Activities />} />
           <Route path="history" element={<Histories />} />
@@ -40,7 +37,7 @@ const Router = () => {
           <Route path="setting" element={<Setting />} />
         </>
       )}
-          {/* <Route path="*" element={<Navigate to={user ? "/" : "login"} />} /> */}
+          <Route path="*" element={<Navigate to={isLogin ? "/" : "login"} />} />
 
     </Routes>
   );

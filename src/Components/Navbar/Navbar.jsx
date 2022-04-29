@@ -206,7 +206,10 @@ const Navbar = ({path}) => {
                   <span>Setting</span>
                 </DropDownItem>
               </Link>
-              <Link to="/">
+              <Link to="/login" onClick={()=>{
+                window.localStorage.setItem("isLogin", "false")
+                window.location.href = "/login"
+              }}>
                 <DropDownItem>
                   <LogoutIcon />
                   <span>Logout</span>

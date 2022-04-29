@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "../GlobalComponent";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../Services/User/index";
@@ -64,19 +64,32 @@ const AuthContent = styled.div`
 const AuthForm = ({ path }) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("test@gmail.com");
+  const [password, setPassword] = useState("test1234");
+  const [error, setError] = useState(null);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const dispatch = useDispatch();
+  
 
-  // const submit = async () => {
-  //   await dispatch(login(email, password));
-  //   navigate.push("/");
-  // };
+  const whenSubmit = async () => {
+    console.log("email", email);
+    console.log("pass", password);
+
+    if (path === "Login") {
+      if (email === "test@gmail.com" && password === "test1234") {
+        window.localStorage.setItem("isLogin", "true");
+        console.log("isLogin");
+        // navigate("/home", { replace: true });
+        window.location.href = "/home";
+      } else {
+        setError("Email or password is incorrect");
+      }
+    }
+  };
 
   return (
-    <FormContainer maxWidth="440px" padding="32px 0" >
+    <FormContainer maxWidth="440px" padding="32px 0">
       <h1>{path}</h1>
       <AuthContainer>
         {path === "Sign up" && (
@@ -100,6 +113,7 @@ const AuthForm = ({ path }) => {
             type="email"
             name="email"
             placeholder="Enter your email"
+            defaultValue="test@gmail.com"
             value={email}
             required
             onChange={(e) => setEmail(e.target.value)}
@@ -112,6 +126,7 @@ const AuthForm = ({ path }) => {
             id="password"
             type="password"
             name="password"
+            defaultValue="test1234"
             placeholder="Enter your password"
             value={password}
             required
@@ -134,8 +149,11 @@ const AuthForm = ({ path }) => {
         )}
       </AuthContainer>
       <div className="flex">
-        <Button width="70%">{path}</Button>
+        <Button width="70%" onClick={whenSubmit}>
+          {path}
+        </Button>
       </div>
+      {error && error}
       {path === "Login" && (
         <>
           <p>or</p>
